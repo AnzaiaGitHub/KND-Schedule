@@ -128,9 +128,10 @@ const monthPrototype = function(date){
   this.name = months[date.getMonth()];
   this.year = date.getFullYear();
   this.days = setMonthDays(date);
+  this.date = date;
 };
 
-//testing with dates
+//testing with dates and start of the functionality
 function onload(){
   console.log("Date: "+now);
   console.log("Week day "+ weekDays[now.getDay()]);
@@ -211,6 +212,22 @@ function getDrawDay(day){
   </li>
   `;
   return str;
+}
+function changeMonth(diff){
+  let month = curMonthObject.date.getMonth();
+  let year = curMonthObject.date.getFullYear();
+  if(diff>0 && month==11){
+    //nextYear
+    setObjectMonth(new Date(year+1,0,1));
+  }else if(diff>0){
+    setObjectMonth(new Date(year,month+diff,1));
+  }else if(diff<0 && month==0){
+    //lastyear
+    setObjectMonth(new Date(year-1,11,1));
+  }else{
+    setObjectMonth(new Date(year,month+diff,1));
+  }
+  drawMonth();
 }
 
 /*onload function*/
