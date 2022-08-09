@@ -2,8 +2,9 @@
   --sm: 10px;
   --md: 16px;
   --lg: 24px;
-  --pink: #e19bea;
-  --blue: #7575ec;
+  --yellow: #d0d302;
+  --red: #be0000;
+  --black: #161622;
 }
 *{
   box-sizing: border-box;
@@ -32,21 +33,24 @@ body{
   width: 600px;
   height: 100%;
   margin: 12px;
-  border: 2px solid darkred;
+  border: 2px solid var(--black);
   border-radius: 20px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 #calendar .month-section{
   display: grid;
   grid-template-columns: auto 1fr auto;
   width: 100%;
-  border-bottom: 1px solid darkred;
+  border-bottom: 1px solid var(--black);
   height: 10%;
 }
 #calendar .month-section .month-button{
   background-color: rgba(0,0,0,0);
   border: none;
   padding: 0 24px;
+  height: 100%;
   font-size: var(--lg);
   cursor: pointer;
   transition: 0.15s ease-in-out all;
@@ -63,7 +67,7 @@ body{
   width: 100%;
   padding: 8px 0;
   border-width: 0 1px;
-  border-color: #002;
+  border-color: var(--black);
   border-style: solid;
 }
 #calendar .month-section .month span:first-child{
@@ -84,7 +88,7 @@ body{
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   text-align: center;
-  background-color: #002;
+  background-color: var(--black);
   color: white;
   font-size: var(--md);
   padding: 4px 8px;
@@ -133,7 +137,7 @@ body{
   grid-column-start: 7;
 }
 #calendar .month_days #month_days-values>li.today{
-  border: 3px solid #002;
+  border: 3px solid var(--black);
   font-weight: bold;
 }
 #calendar .month_days #month_days-values>li>p{
@@ -150,19 +154,27 @@ body{
 }
 #calendar .month_days #month_days-values>li>div>span{
   padding: 0 8px;
-  font-size: var(--sm);
   width: 20px;
   height: 20px;
+  font-size: var(--sm);
+  font-weight: bold;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#calendar .month_days #month_days-values>li>div>span.category-1{
-  background-color: var(--blue);
+#calendar .month_days #month_days-values>li>div>span.category-K{
+  background-color: var(--yellow);
 }
-#calendar .month_days #month_days-values>li>div>span.category-2{
-  background-color: var(--pink);
+#calendar .month_days #month_days-values>li>div>span.category-F{
+  background-color: var(--red);
+}
+#calendar .month_days #month_days-values>li>div>span.category-M{
+  background-color: var(--black);
+  color: white;
+}
+#calendar .month_days #month_days-values>li>div>span.category-A{
+  border: 1px solid blue;
 }
 #convention{
   width: 25%;

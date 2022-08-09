@@ -1,6 +1,9 @@
 //vars and conversor objects
 var now = new Date();
 var curMonthObject;
+const docMonthDays = document.getElementById("month_days-values");
+const docMonthText = document.getElementById("month-text");
+const docMonthYear = document.getElementById("year-text");
 const referenceDay = new Date(2022,7,7); //Aug 7 2022
 const referenceKNDWeek = 3;
 const weekDays = {
@@ -134,13 +137,15 @@ function onload(){
   console.log("Day "+parseInt(now.toString().split(" ")[2]));
   console.log("Month "+months[now.getMonth()]);
   console.log("Year "+now.getFullYear());
+  setObjectMonth(now);
+  drawMonth();
 }
 
 /*functions*/
-function daysDiff(date){
+function daysDiff(date, date2=referenceDay){
   //Days difference from referenceday
   let curDate = new Date(date.getFullYear(),date.getMonth(),parseInt(date.toString().split(" ")[2]));
-  return (curDate-referenceDay)/86400000;
+  return (curDate-date2)/86400000;
 }
 function getKNDWeek(date){
   let days = daysDiff(date);
@@ -178,3 +183,35 @@ function setMonthDays(date){
   }
   return daysArray;
 }
+function drawMonth(){
+  docMonthText.innerHTML = curMonthObject.name;
+  docMonthYear.innerHTML = curMonthObject.year;
+  docMonthDays.innerHTML="";
+  curMonthObject.days.forEach((day)=>{
+    docMonthDays.innerHTML+= getDrawDay(day);
+  });
+}
+function getDrawDay(day){
+  let today = daysDiff(now, day.date)==0?"today":"";
+  let teamsStr ="";
+  if(day.teams){
+    let teams = day.teams.forEach((team)=>{
+      let str = `
+      <span class="category-${team}">${team}</span>
+      `;
+      teamsStr+=str;
+    });
+  }
+  let str = `
+  <li class="is-${day.weekDay} ${today}">
+    <p id="day-${day.day}">${day.day}</p>
+    <div class="teams">
+    ${teamsStr}
+    </div>
+  </li>
+  `;
+  return str;
+}
+
+/*onload function*/
+window.onload();
