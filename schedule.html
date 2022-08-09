@@ -11,7 +11,7 @@
   <div id="container">
     <div id="calendar">
       <div class="month-section">
-        <button class="btn month-button"><</button>
+        <button class="btn month-button" onclick="changeMonth(-1)"><</button>
         <p class="month">
           <span id="month-text">
             August
@@ -20,7 +20,7 @@
             2022
           </span>
         </p>
-        <button class="btn month-button">></button>
+        <button class="btn month-button" onclick="changeMonth(1)">></button>
       </div>
       <div class="month_days">
         <ul id="weekdays">
@@ -57,11 +57,11 @@
             <p>6</p>
             <div><span class="category-1">M</span><span class="category-2">F</span></div>
           </li>
-          <li>
+          <li class="today">
             <p>7</p>
             <div><span class="category-1">M</span><span class="category-2">F</span></div>
           </li>
-          <li class="today" id="day-8">
+          <li id="day-8">
             <p>8</p>
             <div><span class="category-1">M</span><span class="category-2">F</span></div>
           </li>
