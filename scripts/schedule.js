@@ -145,7 +145,7 @@ function getKNDWeek(date){
     let weekDiff = Math.floor(days/7);
     return weekDiff%3 >0 ? weekDiff%3 : 3;
   }else{
-    let weekDiff = Math.floor()
-    return "negative days";
+    let weekDiff = Math.floor((Math.abs(days)+6)/7);
+    return (3-weekDiff%3);
   }
 }
