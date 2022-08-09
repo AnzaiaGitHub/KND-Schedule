@@ -1,6 +1,6 @@
 //vars and conversor objects
 var now = new Date();
-var curMonth;
+var curMonthObject;
 const referenceDay = new Date(2022,7,7); //Aug 7 2022
 const referenceKNDWeek = 3;
 const weekDays = {
@@ -26,9 +26,8 @@ const months = {
   10: "November",
   11: "December"
 };
-const KNDweeks = [
-  {
-    week: 1,
+const KNDweeks = {
+  1: {
     monday: {
       teams: ["K","F","F"],
       place: "Farallones"
@@ -54,8 +53,7 @@ const KNDweeks = [
       place: "Farallones"
     }
   },
-  {
-    week: 2,
+  2: {
     monday: {
       teams: ["K","M","M"],
       place: "Farallones"
@@ -81,8 +79,7 @@ const KNDweeks = [
       place: "Farallones"
     }
   },
-  {
-    week: 3,
+  3: {
     monday: {
       teams: ["K","F","F"],
       place: "Farallones"
@@ -108,30 +105,36 @@ const KNDweeks = [
       place: "Farallones"
     }
   },
-];
-const dayPrototype = function(date, teams, place, KNDWeek){
-  let month = date.getMonth+1;
-  
-  this.date = new Date()
+};
+const dayPrototype = function(date, KNDWeek){
+  let weekDay = weekDays[date.getDay()];
+  let KNDday = KNDweeks[KNDWeek][weekDay];
+  this.date = date;
   this.day = parseInt(date.toString().split(" ")[2]);
   this.KNDWeek = KNDWeek;
-  this.weekDay = date.getDay();
-  this.time1 = teams[0];
-  this.time2 = teams[1];
-  this.place = place;
+  this.weekDay = weekDay;
+  if(KNDday){
+    this.teams = KNDday.teams;
+    this.place = KNDday.place;
+  }else{
+    this.teams = null;
+    this.place = null;
+  }
 }
 const monthPrototype = function(date){
   this.name = months[date.getMonth()];
   this.year = date.getFullYear();
-  this.days = new Date(date.getFullYear(),date.getMonth()+1,0).getDate();
+  this.days = setMonthDays(date);
 };
 
 //testing with dates
-console.log("Date: "+now);
-console.log("Week day "+ weekDays[now.getDay()]);
-console.log("Day "+parseInt(now.toString().split(" ")[2]));
-console.log("Month "+months[now.getMonth()]);
-console.log("Year "+now.getFullYear());
+function onload(){
+  console.log("Date: "+now);
+  console.log("Week day "+ weekDays[now.getDay()]);
+  console.log("Day "+parseInt(now.toString().split(" ")[2]));
+  console.log("Month "+months[now.getMonth()]);
+  console.log("Year "+now.getFullYear());
+}
 
 /*functions*/
 function daysDiff(date){
@@ -148,4 +151,30 @@ function getKNDWeek(date){
     let weekDiff = Math.floor((Math.abs(days)+6)/7);
     return (3-weekDiff%3);
   }
+}
+function setObjectMonth(date){
+  curMonthObject = new monthPrototype(date);
+}
+function setDay(date){
+  let curKNDWeek = getKNDWeek(date);
+  let newDay = new dayPrototype(date,curKNDWeek);
+  return newDay;
+}
+function setMonthDays(date){
+  let days = new Date(date.getFullYear(),date.getMonth()+1,0).getDate();
+  console.log("setting "+days+" days");
+  
+  let month = date.getMonth();
+  console.log("for the "+months[month]+" month");
+
+  let year = date.getFullYear();
+  console.log("on the "+(year)+" year");
+
+  let daysArray=[];
+  for(let i=1;i<=days;i++){
+    let curDate = new Date(date.getFullYear(),date.getMonth(),i);
+    let newDay = setDay(curDate);
+    daysArray.push(newDay);
+  }
+  return daysArray;
 }
