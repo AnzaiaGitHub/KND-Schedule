@@ -4,7 +4,7 @@ var curMonthObject;
 const docMonthDays = document.getElementById("month_days-values");
 const docMonthText = document.getElementById("month-text");
 const docMonthYear = document.getElementById("year-text");
-const referenceDay = new Date(2022,7,7); //Aug 7 2022
+const referenceDay = new Date(2022,9,9); //Aug 7 2022
 const referenceKNDWeek = 3;
 const weekDays = {
   0: "sunday",
@@ -29,18 +29,98 @@ const months = {
   10: "November",
   11: "December"
 };
+// const KNDweeks = {
+//   1: {
+//     monday: {
+//       teams: ["K","F","F"],
+//       place: "Farallones"
+//     },
+//     tuesday: {
+//       teams: ["K","A","A"],
+//       place: "Buenos Aires"
+//     },
+//     wednesday: {
+//       teams: ["K","M","M"],
+//       place: "Farallones"
+//     },
+//     thursday: {
+//       teams: ["A","A","A"],
+//       place: "Buenos Aires"
+//     },
+//     friday: {
+//       teams: ["K","F","M"],
+//       place: "Farallones"
+//     },
+//     saturday: {
+//       teams:["K"],
+//       place: "Farallones"
+//     }
+//   },
+//   2: {
+//     monday: {
+//       teams: ["K","M","M"],
+//       place: "Farallones"
+//     },
+//     tuesday: {
+//       teams: ["K","A","A"],
+//       place: "Buenos Aires"
+//     },
+//     wednesday: {
+//       teams: ["K","F","M"],
+//       place: "Farallones"
+//     },
+//     thursday: {
+//       teams: ["A","A","A"],
+//       place: "Buenos Aires"
+//     },
+//     friday: {
+//       teams: ["K","F","F"],
+//       place: "Farallones"
+//     },
+//     saturday: {
+//       teams:["K"],
+//       place: "Farallones"
+//     }
+//   },
+//   3: {
+//     monday: {
+//       teams: ["K","F","F"],
+//       place: "Farallones"
+//     },
+//     tuesday: {
+//       teams: ["K","A","A"],
+//       place: "Buenos Aires"
+//     },
+//     wednesday: {
+//       teams: ["K","F","M"],
+//       place: "Farallones"
+//     },
+//     thursday: {
+//       teams: ["A","A","A"],
+//       place: "Buenos Aires"
+//     },
+//     friday: {
+//       teams: ["K","M","M"],
+//       place: "Farallones"
+//     },
+//     saturday: {
+//       teams:["K"],
+//       place: "Farallones"
+//     }
+//   },
+// };
 const KNDweeks = {
   1: {
     monday: {
-      teams: ["K","F","F"],
+      teams: ["K","F","M"],
       place: "Farallones"
     },
     tuesday: {
-      teams: ["K","A","A"],
+      teams: ["K","M","M"],
       place: "Buenos Aires"
     },
     wednesday: {
-      teams: ["K","M","M"],
+      teams: ["K","F","M"],
       place: "Farallones"
     },
     thursday: {
@@ -48,7 +128,7 @@ const KNDweeks = {
       place: "Buenos Aires"
     },
     friday: {
-      teams: ["K","F","M"],
+      teams: ["K","F","F"],
       place: "Farallones"
     },
     saturday: {
@@ -58,37 +138,11 @@ const KNDweeks = {
   },
   2: {
     monday: {
-      teams: ["K","M","M"],
-      place: "Farallones"
-    },
-    tuesday: {
-      teams: ["K","A","A"],
-      place: "Buenos Aires"
-    },
-    wednesday: {
       teams: ["K","F","M"],
       place: "Farallones"
     },
-    thursday: {
-      teams: ["A","A","A"],
-      place: "Buenos Aires"
-    },
-    friday: {
-      teams: ["K","F","F"],
-      place: "Farallones"
-    },
-    saturday: {
-      teams:["K"],
-      place: "Farallones"
-    }
-  },
-  3: {
-    monday: {
-      teams: ["K","F","F"],
-      place: "Farallones"
-    },
     tuesday: {
-      teams: ["K","A","A"],
+      teams: ["K","F","F"],
       place: "Buenos Aires"
     },
     wednesday: {
@@ -115,6 +169,8 @@ const dayPrototype = function(date, KNDWeek){
   this.date = date;
   this.day = parseInt(date.toString().split(" ")[2]);
   this.KNDWeek = KNDWeek;
+  console.log("Day "+this.day);
+  console.log("KNDWeek "+KNDWeek);
   this.weekDay = weekDay;
   if(KNDday){
     this.teams = KNDday.teams;
@@ -152,10 +208,10 @@ function getKNDWeek(date){
   let days = daysDiff(date);
   if(days >= 0){
     let weekDiff = Math.floor(days/7);
-    return weekDiff%3 >0 ? weekDiff%3 : 3;
+    return weekDiff%2 >0 ? 1 : 2;
   }else{
     let weekDiff = Math.floor((Math.abs(days)+6)/7);
-    return (3-weekDiff%3);
+    return (2-weekDiff%2);
   }
 }
 function setObjectMonth(date){
