@@ -1,39 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="css/schedule.css">
-  <title>KND Schedule</title>
-</head>
-<body>
-  <div id="container">
-    <div id="calendar">
-      <div class="month-section">
-        <button class="btn month-button" onclick="changeMonth(-1)"><</button>
-        <p class="month">
-          <span id="month-text">
-            August
-          </span>
-          <span id="year-text">
-            2022
-          </span>
-        </p>
-        <button class="btn month-button" onclick="changeMonth(1)">></button>
-      </div>
-      <div class="month_days">
-        <ul id="weekdays">
-          <li>Sun</li>
-          <li>Mon</li>
-          <li>Tue</li>
-          <li>Wed</li>
-          <li>Thu</li>
-          <li>Fri</li>
-          <li>Sat</li>
-        </ul>
-        <ul id="month_days-values">
-          <!-- <li class="is-monday">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/schedule.css" />
+    <title>KND Schedule</title>
+  </head>
+  <body>
+    <h1 id="title">Training schedule</h1>
+    <p id="sub-title">KND Volleyball Club</p>
+    <div id="container">
+      <div id="calendar">
+        <div class="month-section">
+          <button class="btn month-button" onclick="changeMonth(-1)"><</button>
+          <p class="month">
+            <span id="month-text"> August </span>
+            <span id="year-text"> 2022 </span>
+          </p>
+          <button class="btn month-button" onclick="changeMonth(1)">></button>
+        </div>
+        <div class="month_days">
+          <ul id="weekdays">
+            <li>Sun</li>
+            <li>Mon</li>
+            <li>Tue</li>
+            <li>Wed</li>
+            <li>Thu</li>
+            <li>Fri</li>
+            <li>Sat</li>
+          </ul>
+          <ul id="month_days-values">
+            <!-- <li class="is-monday">
             <p id="day-1">1</p>
             <div><span class="category-1">M</span><span class="category-2">F</span></div>
           </li>
@@ -157,13 +155,42 @@
             <p>31</p>
             <div><span class="category-1">M</span><span class="category-2">F</span></div>
           </li> -->
-        </ul>
+          </ul>
+        </div>
+      </div>
+      <div id="convention">
+        <div class="teams">
+          <p class="A">
+            <span class="circle"></span
+            ><span class="convention-underline">All:</span> Todos
+          </p>
+          <p class="K">
+            <span class="circle"></span
+            ><span class="convention-underline">Kids:</span> Formativo
+          </p>
+          <p class="F">
+            <span class="circle"></span
+            ><span class="convention-underline">Female:</span> Femenino
+          </p>
+          <p class="M">
+            <span class="circle"></span
+            ><span class="convention-underline">Male:</span> Masculino
+          </p>
+        </div>
+        <div class="hours-week">
+          <div class="hours-week-days">
+            <p>Lunes a Viernes</p>
+            <p class="day-hour">5:00PM - 7:00PM</p>
+            <p class="day-hour">7:00PM - 8:30PM</p>
+            <p class="day-hour">8:30PM - 10:00PM</p>
+          </div>
+          <div class="hours-week-days">
+            <p>Sábado</p>
+            <p class="day-hour">10:00AM - 12:00PM</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div id="convention">
-
-    </div>
-  </div>
-  <script src="./scripts/schedule.js"></script>
-</body>
+    <script src="./scripts/schedule.js"></script>
+  </body>
 </html>
